@@ -3,19 +3,129 @@
 <head>
     <title>银行产品购买预测</title>
     <style>
-        .container { max-width: 800px; margin: 20px auto; padding: 20px; }
-        .form-group { margin-bottom: 15px; display: flex; align-items: center; }
-        label { width: 200px; margin-right: 20px; font-weight: bold; }
-        input { width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
-        button { 
-            background: #007bff; color: white; border: none; 
-            padding: 10px 20px; border-radius: 4px; cursor: pointer;
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        button:hover { background: #0056b3; }
-        .description { 
-            font-size: 0.9em; color: #666; margin-top: 5px;
-            display: block; width: 300px; margin-left: 220px;
+
+        .container {
+            background-color: #fff;
+            max-width: 900px; /* 稍微增加容器宽度 */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            margin: 20px;
         }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: grid; /* 使用 Grid 布局 */
+            grid-template-columns: 250px 1fr; /* 定义两列，第一列标签固定宽度，第二列输入框自适应 */
+            grid-column-gap: 20px; /* 列间距 */
+            grid-row-gap: 15px; /* 行间距 */
+        }
+
+        .form-group {
+            display: contents; /* 让 form-group 成为 grid item 的容器，自身不参与布局 */
+        }
+
+        label {
+            grid-column: 1; /* 标签放在第一列 */
+            text-align: right;
+            font-weight: 600;
+            color: #555;
+            align-self: center; /* 垂直居中对齐 */
+            padding-right: 10px; /* 标签右内边距，稍微拉开与输入框的距离 */
+        }
+
+        input[type="number"], select {
+            grid-column: 2; /* 输入框放在第二列 */
+            width: 100%; /* 宽度占据整列 */
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box; /* 包含 padding 和 border 在宽度内 */
+        }
+
+        input[type="number"]:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: calc(100% - 10px);
+            background-position-y: 50%;
+            background-size: 16px;
+            padding-right: 30px;
+        }
+
+        .description {
+            grid-column: 2; /* 描述信息放在第二列，与输入框对齐 */
+            font-size: 0.9em;
+            color: #777;
+            margin-top: 5px;
+            font-style: italic;
+            padding-left: 0; /* 移除左内边距，与输入框左对齐 */
+        }
+
+        button {
+            grid-column: 2; /* 按钮放在第二列 */
+            justify-self: start; /* 按钮在第二列左对齐 */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            margin-top: 20px; /* 按钮上边距 */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .submit-button {
+            grid-column: 1 / span 2; /* 提交按钮占据两列 */
+            text-align: center; /* 按钮组居中 */
+        }
+
+        .submit-button button {
+            justify-self: center; /* 按钮在按钮组中居中 */
+        }
+
+        .submit-button label {
+            display: none; /* 隐藏提交按钮前的label */
+        }
+
     </style>
 </head>
 <body>
@@ -28,7 +138,7 @@
                 <input type="number" name="age" required>
                 <span class="description">客户年龄（18-100岁）</span>
             </div>
-            
+
             <div class="form-group">
                 <label>上次通话时长 (duration):</label>
                 <input type="number" name="duration" required>
@@ -103,7 +213,7 @@
                     <option value="12">十二月</option>
                 </select>
             </div>
-            
+
             <!-- 星期下拉 -->
             <div class="form-group">
                 <label>星期 (day):</label>
@@ -116,10 +226,9 @@
                     <option value="6">周六</option>
                     <option value="7">周日</option>
                 </select>
-                <span class="description">1-7代表周一到周日</span>
             </div>
 
-            <div class="form-group" style="margin-top: 30px;">
+            <div class="form-group submit-button">
                 <label></label>
                 <button type="submit">开始预测</button>
             </div>

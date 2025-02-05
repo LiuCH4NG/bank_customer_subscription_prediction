@@ -3,15 +3,76 @@
 <head>
     <title>发生错误</title>
     <style>
-        .container { max-width: 800px; margin: 50px auto; padding: 30px; 
-                    text-align: center; border: 1px solid #dc3545; 
-                    border-radius: 8px; color: #dc3545; }
-        a { color: #007bff; }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            max-width: 800px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 20px;
+            border: 2px solid #dc3545; /* 红色边框，更醒目 */
+            color: #333; /* 文本颜色改回深灰色，错误信息会单独强调 */
+        }
+
+        h1 {
+            text-align: center;
+            color: #dc3545; /* 红色标题，强调错误 */
+            margin-bottom: 20px;
+            font-size: 2.5em; /* 稍微增大标题字体 */
+        }
+
+        h1 span {
+            display: block; /* 让 "⚠️" 符号单独占一行 */
+            font-size: 1.5em; /* 稍微缩小符号大小，保持协调 */
+            margin-bottom: 10px; /* 符号和文字之间增加间距 */
+        }
+
+        p {
+            font-size: 18px;
+            color: #555; /* 错误信息文本颜色 */
+            margin-bottom: 30px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 12px 30px;
+            margin-top: 20px;
+            color: white;
+            background-color: #dc3545; /* 红色按钮，强调错误 */
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        a:hover {
+            background-color: #c82333; /* hover 时颜色加深 */
+            text-decoration: none;
+        }
+
+        a:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(220, 53, 69, 0.5); /* focus 时红色阴影 */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>⚠️ 发生错误</h1>
+        <h1><span>⚠️</span> 发生错误</h1>
         <p>{{ message }}</p>
         <a href="/">返回首页</a>
     </div>

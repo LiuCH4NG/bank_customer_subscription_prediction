@@ -3,22 +3,81 @@
 <head>
     <title>预测结果</title>
     <style>
-        .container { max-width: 800px; margin: 50px auto; padding: 30px; 
-                    text-align: center; border: 1px solid #ddd; border-radius: 8px; }
-        .result { font-size: 24px; color: #28a745; margin: 20px 0; }
-        .probability { font-size: 18px; color: #666; }
-        a { 
-            display: inline-block; margin-top: 20px; 
-            color: #007bff; text-decoration: none;
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
-        a:hover { text-decoration: underline; }
+
+        .container {
+            background-color: #fff;
+            max-width: 800px;
+            padding: 40px; /* 增加 padding */
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center; /* 保持文本居中 */
+            margin: 20px; /* 容器外边距 */
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .result {
+            font-size: 28px; /* 更大的字体 */
+            color: #007bff; /* 蓝色，强调结果 */
+            margin: 30px 0; /* 增加上下 margin */
+            font-weight: bold; /* 加粗结果 */
+        }
+
+        .probability {
+            font-size: 18px;
+            color: #777; /* 颜色稍浅，与结果区分 */
+            margin-bottom: 20px; /* 增加下 margin */
+        }
+
+        .probability strong {
+            font-weight: 600; /* 加粗概率值 */
+            color: #555; /* 稍微深色一点 */
+        }
+
+        a {
+            display: inline-block;
+            padding: 12px 30px; /* 按钮内边距 */
+            margin-top: 30px; /* 增加上 margin */
+            color: white;
+            background-color: #007bff; /* 蓝色背景 */
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+        }
+
+        a:hover {
+            background-color: #0056b3; /* hover 时颜色加深 */
+            text-decoration: none; /* 移除默认下划线 */
+        }
+
+        a:focus {
+            outline: none; /* 移除 focus 时的轮廓线 */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* focus 时添加阴影 */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>预测结果</h1>
         <div class="result">{{ result }}</div>
-        <div class="probability">购买概率：{{ probability }}</div>
+        <div class="probability">购买概率：<strong>{{ probability }}</strong></div>
         <a href="/">重新预测</a>
     </div>
 </body>
