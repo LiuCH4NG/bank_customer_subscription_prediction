@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>银行产品购买预测</title>
+    <style>
+        .container { max-width: 800px; margin: 20px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; display: flex; align-items: center; }
+        label { width: 200px; margin-right: 20px; font-weight: bold; }
+        input { width: 300px; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        button { 
+            background: #007bff; color: white; border: none; 
+            padding: 10px 20px; border-radius: 4px; cursor: pointer;
+        }
+        button:hover { background: #0056b3; }
+        .description { 
+            font-size: 0.9em; color: #666; margin-top: 5px;
+            display: block; width: 300px; margin-left: 220px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>客户特征输入</h1>
+        <form action="/predict" method="post">
+            <!-- 数值型特征 -->
+            <div class="form-group">
+                <label>年龄 (age):</label>
+                <input type="number" name="age" required>
+                <span class="description">客户年龄（18-100岁）</span>
+            </div>
+            
+            <div class="form-group">
+                <label>上次通话时长 (duration):</label>
+                <input type="number" name="duration" required>
+                <span class="description">单位：秒</span>
+            </div>
+
+            <div class="form-group">
+                <label>本次营销联系次数 (campaign):</label>
+                <input type="number" name="campaign" required>
+                <span class="description">本次活动中联系该客户的次数</span>
+            </div>
+
+            <div class="form-group">
+                <label>距上次联系天数 (pdays):</label>
+                <input type="number" name="pdays" required>
+                <span class="description">999表示未联系过</span>
+            </div>
+
+            <div class="form-group">
+                <label>历史联系次数 (previous):</label>
+                <input type="number" name="previous" required>
+                <span class="description">本次活动前联系次数</span>
+            </div>
+
+            <!-- 经济指标 -->
+            <div class="form-group">
+                <label>就业变动率 (emp_var_rate):</label>
+                <input type="number" step="0.01" name="emp_var_rate" required>
+                <span class="description">季度指标（如：1.2）</span>
+            </div>
+
+            <div class="form-group">
+                <label>消费者物价指数 (cons_price_index):</label>
+                <input type="number" step="0.01" name="cons_price_index" required>
+                <span class="description">月度指标（如：93.2）</span>
+            </div>
+
+            <div class="form-group">
+                <label>消费者信心指数 (cons_conf_index):</label>
+                <input type="number" step="0.01" name="cons_conf_index" required>
+                <span class="description">月度指标（如：-36.4）</span>
+            </div>
+
+            <div class="form-group">
+                <label>3个月利率 (lending_rate3m):</label>
+                <input type="number" step="0.01" name="lending_rate3m" required>
+                <span class="description">百分比（如：4.25）</span>
+            </div>
+
+            <div class="form-group">
+                <label>雇员人数 (nr_employed):</label>
+                <input type="number" step="0.01" name="nr_employed" required>
+                <span class="description">季度指标（如：5000.5）</span>
+            </div>
+
+            <!-- 周期性特征 -->
+            <!-- 月份下拉 -->
+            <div class="form-group">
+                <label>月份 (month):</label>
+                <select name="month" required>
+                    <option value="1">一月</option>
+                    <option value="2">二月</option>
+                    <option value="3">三月</option>
+                    <option value="4">四月</option>
+                    <option value="5">五月</option>
+                    <option value="6">六月</option>
+                    <option value="7">七月</option>
+                    <option value="8">八月</option>
+                    <option value="9">九月</option>
+                    <option value="10">十月</option>
+                    <option value="11">十一月</option>
+                    <option value="12">十二月</option>
+                </select>
+            </div>
+            
+            <!-- 星期下拉 -->
+            <div class="form-group">
+                <label>星期 (day):</label>
+                <select name="day" required>
+                    <option value="1">周一</option>
+                    <option value="2">周二</option>
+                    <option value="3">周三</option>
+                    <option value="4">周四</option>
+                    <option value="5">周五</option>
+                    <option value="6">周六</option>
+                    <option value="7">周日</option>
+                </select>
+                <span class="description">1-7代表周一到周日</span>
+            </div>
+
+            <div class="form-group" style="margin-top: 30px;">
+                <label></label>
+                <button type="submit">开始预测</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
