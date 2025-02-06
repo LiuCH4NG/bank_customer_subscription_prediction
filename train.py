@@ -1,6 +1,6 @@
 """
 银行产品购买预测完整流程
-包含：数据预处理、模型训练、特征选择、模型存储、预测API
+包含：数据预处理、模型训练、特征选择、模型存储
 """
 
 # ========== 环境配置 ==========
@@ -16,7 +16,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from xgboost import XGBClassifier
-from sklearn.feature_selection import SelectFromModel
 from imblearn.ensemble import BalancedRandomForestClassifier
 
 # 创建模型存储目录
@@ -48,8 +47,8 @@ def load_and_preprocess(data_path):
     data['day_cos'] = np.cos(2 * np.pi * data['day_of_week'] / 5)
     
     # 处理pdays特殊值
-    data['contacted_before'] = np.where(data['pdays'] == 999, 0, 1)
-    data['pdays'] = np.where(data['pdays'] == 999, 0, data['pdays'])
+    data['contacted_before'] = np.where(data['pdays'] == 9999, 0, 1)
+    data['pdays'] = np.where(data['pdays'] == 9999, 0, data['pdays'])
     
     return data
 
@@ -183,6 +182,11 @@ if __name__ == "__main__":
     data = load_and_preprocess('data/train.csv')
     X = data.drop('subscribe', axis=1)
     y = data['subscribe']
+    # 使用train_test_split函数将数据集X和y分割为训练集和测试集
+    # X_train: 训练集的特征数据
+    # X_test: 测试集的特征数据
+    # y_train: 训练集的目标数据
+    # y_test: 测试集的目标数据
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y)
     
